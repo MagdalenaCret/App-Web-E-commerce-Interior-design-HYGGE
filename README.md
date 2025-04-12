@@ -61,7 +61,7 @@ Basic design patterns: MVC (Model-View-Controller) for separating business logic
     <img src="presentation/image4.png" width="400" alt="Product Order User Page"/>
   </p>
   <p>
-    <img src="presentation/image5.png" width="400" alt="Product Order Status"/>
+    <img src="presentation/image5.png" width="300" alt="Product Order Status"/>
      <img src="presentation/image6.png" width="400" alt="Login Page"/>
   </p>
 </div>
