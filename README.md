@@ -74,7 +74,7 @@ The application follows a multi-tier architecture:
 - **Data Access Layer:** Database interactions
 - **Database Layer:** MySQL database
 
-## 🚀 Setup & Installation
+## 🚀 Setup & Installation (in process)
 
 ### Requirements
 - Java JDK 17+
@@ -82,21 +82,14 @@ The application follows a multi-tier architecture:
 - MySQL Database
 - Web browser (Chrome, Firefox, Edge, etc.)
 
-### Installation Steps
-1. Clone the repository
-2. Configure the database connection in `application.properties`
-3. Run `mvn clean install` to build the project
-4. Run the application using `java -jar target/ecommerce-app.jar`
-5. Access the application at `http://localhost:8080`
-
-## 👨‍💻 Development
+## 👨‍💻 Development (in process)
 
 The project is structured using the MVC pattern:
 - **Models:** Data structures and entity definitions
 - **Views:** Frontend templates and UI components
 - **Controllers:** Request handling and business logic implementation
 
-## 🧪 Testing and Validation
+## 🧪 Testing and Validation (in process)
 
 The application includes various testing approaches:
 - Manual testing for UI/UX interactions
