@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css">
+    <style>
+        .category-image {
+            transition: transform 0.3s ease;
+            width: 280px;  
+            height: 280px; 
+        }
+        .category-image:hover {
+            transform: scale(1.05);
+        }
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .content-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            margin-top: 120px; 
+        }
+        .categories-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: nowrap;
+            padding: 0 1rem;
+        }
+        @media (max-width: 1400px) {
+            .categories-grid {
+                flex-wrap: wrap;
+            }
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+        .back-button {
+            background-color: rgba(255, 255, 255, 0.5); 
+            color: #000;
+            padding: 8px 16px; 
+            border: none;
+            border-radius: 6px; 
+            text-decoration: none;
+            font-size: 14px; 
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button svg {
+            margin-right: 6px;
+            width: 12px;
+            height: 12px;
+            fill: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+   
+        <header class="header">
+            <a href="admin.html" class="logo">HYGGE</a>
+            <nav class="nav-menu">
+                <a href="admin.html" class="back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    Back
+                </a>
+            </nav>
+        </header>
+
+     
+        <div class="content-container">
+            <div class="w-full">
+                <div class="categories-grid">
+             
+                    <div class="text-center">
+                        <a href="adminChairs.html" class="block">
+                            <div class="mb-4 overflow-hidden rounded-lg shadow-lg">
+                                <img src="images/furniture/product37.jpg" alt="Chairs" class="category-image object-cover">
+                            </div>
+                            <h2 class="text-xl text-gray-800 font-medium">Chairs</h2>
+                        </a>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="adminTable.html" class="block">
+                            <div class="mb-4 overflow-hidden rounded-lg shadow-lg">
+                                <img src="images/furniture/table.jpg" alt="Tables" class="category-image object-cover">
+                            </div>
+                            <h2 class="text-xl text-gray-800 font-medium">Tables</h2>
+                        </a>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="adminStorage.html" class="block">
+                            <div class="mb-4 overflow-hidden rounded-lg shadow-lg">
+                                <img src="images/furniture/store9.jpg" alt="Storage" class="category-image object-cover">
+                            </div>
+                            <h2 class="text-xl text-gray-800 font-medium">Storage</h2>
+                        </a>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="adminLighting.html" class="block">
+                            <div class="mb-4 overflow-hidden rounded-lg shadow-lg">
+                                <img src="images/furniture/ligh11.jpg" alt="Lighting" class="category-image object-cover">
+                            </div>
+                            <h2 class="text-xl text-gray-800 font-medium">Lighting</h2>
+                        </a>
+                    </div>
+
+                    <div class="text-center">
+                        <a href="adminCeramics.html" class="block">
+                            <div class="mb-4 overflow-hidden rounded-lg shadow-lg">
+                                <img src="images/furniture/ceramic_shop.jpg" alt="Ceramics" class="category-image object-cover">
+                            </div>
+                            <h2 class="text-xl text-gray-800 font-medium">Ceramics</h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.category-image').forEach(image => {
+            image.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            image.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

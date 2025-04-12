@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .main-content {
+            padding-top: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        .orders-container {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-id {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .order-details {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .order-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-item {
+            font-size: 0.875rem;
+        }
+
+        .info-label {
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+
+        .order-items {
+            margin-top: 1rem;
+        }
+
+        .item-list {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .item-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 500;
+        }
+
+        .item-price {
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .order-total {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .view-details-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: black;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            transition: opacity 0.2s;
+        }
+
+        .view-details-btn:hover {
+            opacity: 0.8;
+        }
+
+        .no-orders {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .no-orders h2 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .no-orders p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .shop-now-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: black;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .shop-now-btn:hover {
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="principalPage.html" class="logo">HYGGE</a>
+        <nav class="nav-menu">
+            <a href="principalPage.html" class="nav-link">Home</a>
+            <a href="shop.html" class="nav-link">Shop</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="#" class="nav-link">My Orders</a>
+            <a href="logout.php" class="nav-link">Logout</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div id="ordersContainer" class="orders-container">
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadOrders);
+
+        function loadOrders() {
+            fetch('get_client_orders.php')
+                .then(response => response.json())
+                .then(orders => {
+                    const container = document.getElementById('ordersContainer');
+                    
+                    if (orders.length === 0) {
+                        container.innerHTML = `
+                            <div class="no-orders">
+                                <h2>No Orders Yet</h2>
+                                <p>Looks like you haven't made any orders yet. Start shopping to see your orders here!</p>
+                                <a href="shop.html" class="shop-now-btn">Shop Now</a>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    container.innerHTML = orders.map(order => `
+                        <div class="order-card">
+                            <div class="order-header">
+                                <div class="order-id">Order #${order.id}</div>
+                                <span class="status-badge status-${order.status.toLowerCase()}">${order.status}</span>
+                            </div>
+                            <div class="order-details">
+                                <div class="order-info">
+                                    <div class="info-item">
+                                        <div class="info-label">Order Date</div>
+                                        <div>${new Date(order.created_at).toLocaleDateString()}</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Total Amount</div>
+                                        <div>€${parseFloat(order.total_amount).toFixed(2)}</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Items</div>
+                                        <div>${order.item_count} items</div>
+                                    </div>
+                                    <div class="info-item">
+                                        <div class="info-label">Delivery Method</div>
+                                        <div>${order.delivery_method}</div>
+                                    </div>
+                                </div>
+                                <button onclick="viewOrderDetails(${order.id})" class="view-details-btn">
+                                    View Order Details
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                })
+                .catch(error => {
+                    console.error('Error loading orders:', error);
+                    const container = document.getElementById('ordersContainer');
+                    container.innerHTML = `
+                        <div class="no-orders">
+                            <h2>Error Loading Orders</h2>
+                            <p>There was a problem loading your orders. Please try again later.</p>
+                        </div>
+                    `;
+                });
+        }
+
+        function viewOrderDetails(orderId) {
+            window.location.href = `order_details.php?id=${orderId}`;
+        }
+    </script>
+</body>
+</html>

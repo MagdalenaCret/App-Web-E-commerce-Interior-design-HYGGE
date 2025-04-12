@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - HYGGE</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+ 
+        .account-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .logout-btn {
+            padding: 10px 30px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .account-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .account-section {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+  
+        .edit-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .save-btn {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .save-btn:hover {
+            background: #45a049;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            margin-top: 1rem;
+            display: none;
+        }
+
+
+        .order-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .order-item {
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .order-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            z-index: 100;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .cart-wrapper {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #333;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke: #333;
+        }
+
+        .spacer {
+    height: 50px; 
+    width: 50px; 
+}
+.view-details-btn {
+    padding: 8px 16px;
+    background-color: #f5f5f5;
+    color: #333;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.view-details-btn:hover {
+    background-color: #e8e8e8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.view-details-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Optional: Add an icon */
+.view-details-btn::after {
+    content: "→";
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.view-details-btn:hover::after {
+    transform: translateX(4px);
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="principalPage.html" class="logo">HYGGE</a>
+        <nav class="nav-menu">
+            <a href="shop.html" class="nav-link">SHOP</a>
+            <a href="about.html" class="nav-link">ABOUT</a>
+            <a href="contact.html" class="nav-link">CONTACT</a>
+            <a href="cart.html" class="cart-wrapper">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <div style="height: 45px;"></div> 
+    <div class="account-container">
+        <div class="account-header">
+            <h1 class="welcome-text">Welcome back, <span id="userName"></span></h1>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+        <div class="account-sections">
+            <div class="account-section">
+                <h2 class="section-title">Personal Information</h2>
+                <form id="editProfileForm" class="edit-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" placeholder="Enter your address">
+                    </div>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                    <p id="successMessage" class="success-message">Changes saved successfully!</p>
+                </form>
+            </div>
+
+            <div class="account-section">
+                <h2 class="section-title">My Orders</h2>
+                <div id="ordersList" class="order-list">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-section" style="background: #f8f8f8; padding: 2rem 2rem; margin-top: 2rem;">
+        <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Useful Information</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="careers.html" style="color: #666; text-decoration: none;">Careers</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="termsAndConditions.html" style="color: #666; text-decoration: none;">Terms & Conditions</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="companyPolice.html" style="color: #666; text-decoration: none;">Company Policy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="privacyPolice.html" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Payment & Delivery</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="howToBuy.html" style="color: #666; text-decoration: none;">How to Buy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="paymentMethods.html" style="color: #666; text-decoration: none;">Payment Methods</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="shippping.html" style="color: #666; text-decoration: none;">Shippind & Return</a></li>
+                    <li style="margin-bottom: 0.3rem;">
+                        <a href="return_form.pdf" id="downloadBtn" class="download-btn" style="color: #666; text-decoration: none;">
+                            Return Form
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+        <div class="footer-column">
+            <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Support</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.3rem;"><a href="faq.html" style="color: #666; text-decoration: none;">FAQ</a></li>
+            </ul>
+        </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; color: #666;">
+            © HYGGE 2024
+        </div>
+    </footer>
+
+    <script>
+        // Check authentication and handle account link visibility
+        function checkAuth() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const accountLink = document.getElementById('accountLink');
+            
+            if (!currentUser || !currentUser.isLoggedIn) {
+                if (accountLink) {
+                    accountLink.style.display = 'none';
+                }
+                window.location.href = 'login.html';
+            } else if (accountLink) {
+                accountLink.style.display = 'inline-block';
+                accountLink.href = 'account.html';
+                accountLink.textContent = currentUser.name;
+            }
+            return currentUser;
+        }
+
+        // Load user data
+        function loadUserData() {
+            const currentUser = checkAuth();
+            
+            // Get the full user data from the users array
+            const allUsers = JSON.parse(localStorage.getItem('users')) || [];
+            const fullUserData = allUsers.find(user => user.email === currentUser.email) || currentUser;
+            
+            // Update the currentUser in localStorage with the complete data
+            const updatedCurrentUser = {
+                ...currentUser,
+                phone: fullUserData.phone || '',
+                address: fullUserData.address || ''
+            };
+            localStorage.setItem('currentUser', JSON.stringify(updatedCurrentUser));
+            
+            // Update the display
+            document.getElementById('userName').textContent = fullUserData.name;
+            document.getElementById('name').value = fullUserData.name;
+            document.getElementById('email').value = fullUserData.email;
+            document.getElementById('phone').value = fullUserData.phone || '';
+            document.getElementById('address').value = fullUserData.address || '';
+        }
+
+        // Save user data
+        function saveUserData(event) {
+            event.preventDefault();
+            
+            const currentUser = checkAuth();
+            const formData = new FormData(event.target);
+            
+            // Create an updated user object with all fields
+            let updatedUser = {
+                ...currentUser,
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                address: formData.get('address')
+            };
+
+            // Update both currentUser and users array in localStorage
+            localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+            
+            // Update the users array to persist all data between sessions
+            const allUsers = JSON.parse(localStorage.getItem('users')) || [];
+            const updatedUsers = allUsers.map(user => {
+                if (user.email === currentUser.email) {
+                    return {
+                        ...user,
+                        name: updatedUser.name,
+                        email: updatedUser.email,
+                        phone: updatedUser.phone,
+                        address: updatedUser.address
+                    };
+                }
+                return user;
+            });
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+            // Update the display header with new name
+            document.getElementById('userName').textContent = updatedUser.name;
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+
+            // Refresh displayed user data
+            loadUserData();
+        }
+
+        // Logout
+        function logout() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const allUsers = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Ensure all user data is saved before logout
+            const updatedUsers = allUsers.map(user => {
+                if (user.email === currentUser.email) {
+                    return {
+                        ...user,
+                        phone: currentUser.phone,
+                        address: currentUser.address,
+                        isLoggedIn: false
+                    };
+                }
+                return user;
+            });
+            
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+            localStorage.setItem('currentUser', JSON.stringify({...currentUser, isLoggedIn: false}));
+            window.location.href = 'principalPage.html';
+        }
+
+        // Load orders
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const currentUser = checkAuth();
+            const userOrders = orders.filter(order => order.userEmail === currentUser.email);
+            
+            const ordersList = document.getElementById('ordersList');
+            if (userOrders.length === 0) {
+                ordersList.innerHTML = '<p>No orders yet</p>';
+                return;
+            }
+
+            ordersList.innerHTML = userOrders.map(order => `
+                <div class="order-item">
+                    <div class="order-details">
+                        <span>Order #${order.id}</span>
+                        <span>${order.date}</span>
+                    </div>
+                    <div class="order-details">
+                        <span>Status: ${order.status}</span>
+                        <span>Total: $${order.total}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserData();
+            loadOrders();
+            document.getElementById('editProfileForm').addEventListener('submit', saveUserData);
+        });
+    </script>
+
+<script>
+    document.getElementById('downloadBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const link = document.createElement('a');
+        link.setAttribute('href', 'return_form.pdf');
+        link.setAttribute('download', 'return_form.pdf');
+        link.setAttribute('target', '_blank');
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+</script>
+
+<!-- Dinamic in order datails - descriere o comanda -->
+
+<script>
+// Add this to your existing script in the account page:
+function loadOrders() {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const currentUser = checkAuth();
+    const userOrders = orders.filter(order => order.userEmail === currentUser.email);
+    
+    const ordersList = document.getElementById('ordersList');
+    if (userOrders.length === 0) {
+        ordersList.innerHTML = '<p>No orders yet</p>';
+        return;
+    }
+    ordersList.innerHTML = userOrders.map(order => `
+    <div class="order-item">
+        <div class="order-details">
+            <span>Order #${order.id}</span>
+            <span>${order.date}</span>
+        </div>
+        <div class="order-details">
+            <span>Status: ${order.status}</span>
+            <span>Total: ${order.total}</span>
+        </div>
+        <button onclick="viewOrderDetails('${order.id}')" class="view-details-btn">View Details</button>
+    </div>
+`).join('');
+}
+
+function viewOrderDetails(orderId) {
+    window.location.href = `orderDetails.html?orderId=${orderId}`;
+}
+
+</script>
+</body>
+</html>
+
+

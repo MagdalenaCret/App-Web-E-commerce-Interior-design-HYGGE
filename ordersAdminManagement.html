@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Order Management - HYGGE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #666;
+        }
+
+        .main-content {
+            padding-top: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .orders-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .orders-title {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-select {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            min-width: 150px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:hover {
+            border-color: #999;
+        }
+
+        .orders-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .orders-table th,
+        .orders-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .orders-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .orders-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-shipped {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-delivered {
+            background: #c3e6cb;
+            color: #1e7e34;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-view {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .btn-update {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .order-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-details-group {
+            margin-bottom: 1rem;
+        }
+
+        .order-details-label {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-items-list {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .order-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem;
+            border-radius: 4px;
+            color: white;
+            z-index: 2000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification-success {
+            background: #28a745;
+        }
+
+        .notification-error {
+            background: #dc3545;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .filters {
+                flex-direction: column;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .orders-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        .back-button {
+            background-color: rgba(255, 255, 255, 0.5); 
+            color: #000;
+            padding: 8px 16px; 
+            border: none;
+            border-radius: 6px; 
+            text-decoration: none;
+            font-size: 14px; 
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button svg {
+            margin-right: 6px;
+            width: 12px;
+            height: 12px;
+            fill: black;
+        }
+        
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="admin.html" class="logo">HYGGE</a>
+        <nav class="nav-menu">
+            <a href="admin.html" class="back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Back
+            </a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="orders-header">
+            <h1 class="orders-title">Order Management</h1>
+        </div>
+    
+        <div class="filters">
+            <select class="filter-select" id="statusFilter">
+                <option value="">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+    
+            <select class="filter-select" id="dateFilter">
+                <option value="">All Time</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+            </select>
+        </div>
+    
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+                <!-- Orders will be loaded here dynamically -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Modal for Order Details -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Order Details</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div id="orderDetails" class="order-details">
+                <!-- Order details will be loaded here -->
+            </div>
+            <div class="modal-actions">
+                <button class="action-btn btn-update" id="updateOrderBtn">Update Status</button>
+                <button class="action-btn btn-view" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// Inițializare evenimente
+document.addEventListener('DOMContentLoaded', () => {
+    loadOrders();
+    setupEventListeners();
+});
+
+function setupEventListeners() {
+    document.getElementById('statusFilter').addEventListener('change', loadOrders);
+    document.getElementById('dateFilter').addEventListener('change', loadOrders);
+    document.querySelector('.close-modal').addEventListener('click', closeModal);
+
+    // Închide modalul când se face click în afara lui
+    window.onclick = function(event) {
+        const modal = document.getElementById('orderModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+}
+
+// Încărcare comenzi
+function loadOrders() {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const userEmail = 'magdalenacret89@gmail.com'; // Email-ul utilizatorului specific
+
+    // Filtrare comenzi pentru utilizatorul specific
+    let userOrders = orders.filter(order => 
+        order.customer && order.customer.email === userEmail
+    );
+
+    // Aplică filtrele
+    const statusFilter = document.getElementById('statusFilter').value;
+    const dateFilter = document.getElementById('dateFilter').value;
+
+    if (statusFilter) {
+        userOrders = userOrders.filter(order => 
+            order.status && order.status.toLowerCase() === statusFilter.toLowerCase()
+        );
+    }
+
+    if (dateFilter) {
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        
+        switch(dateFilter) {
+            case 'today':
+                userOrders = userOrders.filter(order => 
+                    new Date(order.date).toDateString() === today.toDateString()
+                );
+                break;
+            case 'week':
+                const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+                userOrders = userOrders.filter(order => 
+                    new Date(order.date) >= weekAgo
+                );
+                break;
+            case 'month':
+                const monthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+                userOrders = userOrders.filter(order => 
+                    new Date(order.date) >= monthAgo
+                );
+                break;
+        }
+    }
+
+    // Sortează comenzile după dată (cele mai recente primul)
+    userOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    displayOrders(userOrders);
+}
+
+// Afișare comenzi
+function displayOrders(orders) {
+    const tableBody = document.getElementById('ordersTableBody');
+    
+    if (!orders || orders.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 2rem;">
+                    No orders found for magdalenacret89@gmail.com
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    tableBody.innerHTML = orders.map(order => {
+        const orderDate = new Date(order.date).toLocaleString();
+        const orderStatus = order.status || 'pending';
+        const orderTotal = parseFloat(order.total) || 0;
+        const items = order.items || [];
+        const itemCount = items.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+
+        return `
+            <tr>
+                <td>#${order.id}</td>
+                <td>
+                    ${order.customer?.name || 'N/A'}<br>
+                    <small>${order.customer?.email || 'N/A'}</small>
+                </td>
+                <td>${orderDate}</td>
+                <td>
+                    <span class="status-badge status-${orderStatus.toLowerCase()}">
+                        ${orderStatus}
+                    </span>
+                </td>
+                <td>€${orderTotal.toFixed(2)}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="action-btn btn-view" onclick="viewOrderDetails('${order.id}')">
+                            View Details (${itemCount} items)
+                        </button>
+                        <button class="action-btn btn-update" onclick="showUpdateStatus('${order.id}')">
+                            Update Status
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// Vizualizare detalii comandă
+function viewOrderDetails(orderId) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = orders.find(o => o.id.toString() === orderId.toString());
+    
+    if (!order) {
+        showNotification('Order not found', 'error');
+        return;
+    }
+
+    const modal = document.getElementById('orderModal');
+    const orderDetails = document.getElementById('orderDetails');
+    
+    orderDetails.innerHTML = `
+        <div class="order-details-group">
+            <div class="order-details-label">Customer Information</div>
+            <p>Name: ${order.customer?.name || 'N/A'}</p>
+            <p>Email: ${order.customer?.email || 'N/A'}</p>
+            <p>Phone: ${order.customer?.phone || 'N/A'}</p>
+            <p>Address: ${order.customer?.address || 'N/A'}</p>
+        </div>
+        
+        <div class="order-details-group">
+            <div class="order-details-label">Order Information</div>
+            <p>Order ID: #${order.id}</p>
+            <p>Date: ${new Date(order.date).toLocaleString()}</p>
+            <p>Status: ${order.status || 'pending'}</p>
+            <p>Payment Method: ${order.payment || 'N/A'}</p>
+            <p>Delivery Method: ${order.deliveryMethod || 'N/A'}</p>
+        </div>
+
+        <div class="order-details-group">
+            <div class="order-details-label">Items</div>
+            <div class="order-items-list">
+                ${(order.items || []).map(item => `
+                    <div class="order-item">
+                        <p><strong>${item.name}</strong></p>
+                        <p>Quantity: ${item.quantity}</p>
+                        <p>Price: €${parseFloat(item.price).toFixed(2)}</p>
+                        <p>Subtotal: €${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+
+        <div class="order-details-group">
+            <div class="order-details-label">Order Summary</div>
+            <p>Subtotal: €${(order.subtotal || 0).toFixed(2)}</p>
+            <p>Shipping: €${(order.delivery || 0).toFixed(2)}</p>
+            <p><strong>Total: €${(order.total || 0).toFixed(2)}</strong></p>
+        </div>
+
+        <div class="order-details-group">
+            <div class="order-details-label">Update Status</div>
+            <select id="statusUpdate" class="status-select">
+                <option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option>
+                <option value="processing" ${order.status === 'processing' ? 'selected' : ''}>Processing</option>
+                <option value="shipped" ${order.status === 'shipped' ? 'selected' : ''}>Shipped</option>
+                <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+                <option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
+            </select>
+        </div>
+    `;
+
+    document.getElementById('updateOrderBtn').onclick = () => updateOrderStatus(orderId);
+    modal.style.display = 'flex';
+}
+
+// Actualizare status comandă
+function updateOrderStatus(orderId) {
+    const newStatus = document.getElementById('statusUpdate').value;
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const orderIndex = orders.findIndex(o => o.id.toString() === orderId.toString());
+    
+    if (orderIndex === -1) {
+        showNotification('Order not found', 'error');
+        return;
+    }
+
+    orders[orderIndex].status = newStatus;
+    localStorage.setItem('orders', JSON.stringify(orders));
+    
+    showNotification(`Order status updated to ${newStatus}`, 'success');
+    closeModal();
+    loadOrders();
+}
+
+function showUpdateStatus(orderId) {
+    viewOrderDetails(orderId);
+}
+
+function closeModal() {
+    document.getElementById('orderModal').style.display = 'none';
+}
+
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+function logout() {
+    window.location.href = 'principalPage.html';
+}
+
+// Helper pentru formatarea datei
+function formatDate(date) {
+    return new Date(date).toLocaleString('en-GB', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+} </script>
+</body>
+</html>

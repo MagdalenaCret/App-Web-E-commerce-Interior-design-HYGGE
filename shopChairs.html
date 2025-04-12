@@ -1,0 +1,1154 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: black;
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .main-content {
+            padding-top: 100px;
+            padding: 2rem;
+        }
+
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .product {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 1rem 0;
+        }
+
+        .add-to-cart {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+        }
+
+        .add-to-cart:hover {
+            background-color: #333;
+        }
+
+        .stock-info {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .title-edit {
+            color: #666;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .spacer {
+            height: 50px;
+            width: 50px;
+        }
+
+        .icons-wrapper {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: black;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+           .search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 1rem; 
+    }
+
+
+.search-icon {
+    position: absolute;
+    right: 8px; /* Așezare în interiorul câmpului */
+    pointer-events: none;
+    color: black; /* Lupa neagră */
+    width: 16px; /* Dimensiune mică pentru lățime */
+    height: 16px; /* Dimensiune mică pentru înălțime */
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 1rem; 
+    }
+
+.search-input {
+    height: 30px; /* Mai scundă */
+    width: 200px; /* Mai îngustă */
+    padding: 0 8px;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    outline: none;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: black;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-input::placeholder {
+    color: #888;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="principalPage.html" class="logo">HYGGE</a>
+        <nav class="nav-menu">
+            <a href="shop.html" class="nav-link">Shop</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="icons-wrapper">
+                <a href="register.html" class="icon-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+            <div class="cart-wrapper">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="cart-count">0</span>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            </div>
+        </nav>
+    </header>
+    
+    <div style="height: 30px;"></div> 
+    <main class="main-content">
+        <h1 class="title-edit">Chairs Collection Shop</h1>
+        
+        <div class="catalog">
+            <div class="product">
+                <img src="images/furniture/product52.jpg" alt="Scarlet Red Urban Dining Chair">
+                <h2 class="product-title">Scarlet Red Urban Dining Chair</h2>
+                <p class="product-description">Dimensions: 48 x 52 x 85 cm</p>
+                <p class="product-description">A bold red dining chair that adds a vibrant touch to any dining space while ensuring comfortable seating.</p>
+                <p class="price">299 EUR</p>
+                <p class="stock-info">In stock - 8 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="images/furniture/product47.jpg" alt="Ivory Cream Fabric Dining Chair">
+                <h2 class="product-title">Ivory Cream Fabric Dining Chair</h2>
+                <p class="product-description">Dimensions: 47 x 50 x 86 cm</p>
+                <p class="product-description">A soft cream-colored dining chair with a clean and neutral look, perfect for bright and airy interiors.</p>
+                <p class="price">279 EUR</p>
+                <p class="stock-info">In stock - 12 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="images/furniture/product3_2.jpg" alt="Addi Beige Fabric Dining Chair">
+                <h2 class="product-title">Addi Beige Fabric Dining Chair by Actona Company</h2>
+                <p class="product-description">Dimensions: 47 x 53 x 86 cm</p>
+                <p class="product-description">A neutral-toned fabric dining chair with a soft texture, perfect for versatile dining room decor.</p>
+                <p class="price">329 EUR</p>
+                <p class="stock-info">In stock - 6 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="images/furniture/product24.jpg" alt="Tressia Style Black Dining Chair">
+                <h2 class="product-title">Tressia Style Black Dining Chair by Kave Home</h2>
+                <p class="product-description">Dimensions: 46 x 52 x 84 cm</p>
+                <p class="product-description">A sleek black dining chair with modern lines, suitable for elegant interiors.</p>
+                <p class="price">289 EUR</p>
+                <p class="stock-info">In stock - 10 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="images/furniture/product70.png" alt="Cherry Velvet Green Dining Chair">
+                <h2 class="product-title">Cherry Velvet Green Dining Chair by HyggeCollection</h2>
+                <p class="product-description">Dimensions: 48 x 53 x 85 cm</p>
+                <p class="product-description">A luxurious green velvet dining chair with a contemporary feel, perfect for cozy dining setups.</p>
+                <p class="price">349 EUR</p>
+                <p class="stock-info">In stock - 4 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+                <div class="product">
+                <img src="images/furniture/product70_1_2.png" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Tressia Style Brown Wooden Dining Chair with Plush Cushion by Kave Home</h2>
+                <p class="product-description">Dimensions:  46 x 52 x 84 cm</p>
+                <p class="product-description">A warm brown wooden dining chair with a cozy, plush cushion, offering timeless elegance and comfort.</p>
+                <p class="price">149 EUR</p>
+                <p class="stock-info">In stock - 5 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product">
+                    <img src="images/furniture/chairr2.jpg" alt="Natural Wooden Dining Chair">
+                    <h2 class="product-title">Natural Wooden Dining Chair with Rattan Seat</h2>
+                    <p class="product-description">Dimensions: 46 x 50 x 85 cm</p>
+                    <p class="product-description">A wooden dining chair featuring a handwoven rattan seat, combining rustic charm with a timeless design for a natural and elegant look.</p>
+                    <p class="price">249 EUR</p>
+                    <p class="stock-info">In stock - 8 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/chairr4.jpg" alt="Cozy Blue Plush Dining Chair">
+                    <h2 class="product-title">Cozy Blue Plush Dining Chair</h2>
+                    <p class="product-description">Dimensions: 50 x 55 x 87 cm</p>
+                    <p class="product-description">A comfortable dining chair with a soft blue plush seat and backrest, designed to bring both style and coziness to your dining area.</p>
+                    <p class="price">299 EUR</p>
+                    <p class="stock-info">In stock - 6 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/product86.jpg" alt="Azure Blue Armchair">
+                    <h2 class="product-title">Azure Blue Armchair</h2>
+                    <p class="product-description">Dimensions: 75 x 80 x 100 cm</p>
+                    <p class="product-description">A stylish blue armchair with soft upholstery and a modern silhouette, perfect for adding a pop of color and comfort to your living space.</p>
+                    <p class="price">549 EUR</p>
+                    <p class="stock-info">In stock - 4 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/product81.jpg" alt="Classic Brown Wooden Dining Chair">
+                    <h2 class="product-title">Classic Brown Wooden Dining Chair</h2>
+                    <p class="product-description">Dimensions: 45 x 50 x 88 cm</p>
+                    <p class="product-description">A traditional dining chair crafted entirely from rich brown wood, offering a timeless and versatile design perfect for classic or rustic interiors.</p>
+                    <p class="price">199 EUR</p>
+                    <p class="stock-info">In stock - 12 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/product85_1.jpg" alt="Cherry Velvet Green Dining Chair">
+                    <h2 class="product-title">Cherry Velvet Green Dining Chair by HyggeCollection</h2>
+                    <p class="product-description">Dimensions: 48 x 53 x 85 cm</p>
+                    <p class="product-description">A luxurious green velvet dining chair with a contemporary feel, perfect for cozy dining setups.</p>
+                    <p class="price">329 EUR</p>
+                    <p class="stock-info">In stock - 7 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/chairr5.jpg" alt="Modern Upholstered Dining Chair">
+                    <h2 class="product-title">Modern Upholstered Dining Chair</h2>
+                    <p class="product-description">Dimensions: 47 x 52 x 86 cm</p>
+                    <p class="product-description">A sleek dining chair with comfortable upholstery and contemporary design.</p>
+                    <p class="price">279 EUR</p>
+                    <p class="stock-info">In stock - 9 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/chairr6.jpg" alt="Nordic Style Dining Chair">
+                    <h2 class="product-title">Nordic Style Dining Chair</h2>
+                    <p class="product-description">Dimensions: 46 x 51 x 84 cm</p>
+                    <p class="product-description">A minimalist dining chair inspired by Scandinavian design principles.</p>
+                    <p class="price">239 EUR</p>
+                    <p class="stock-info">In stock - 10 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/chairr7.jpg" alt="Contemporary Fabric Dining Chair">
+                    <h2 class="product-title">Contemporary Fabric Dining Chair</h2>
+                    <p class="product-description">Dimensions: 48 x 54 x 87 cm</p>
+                    <p class="product-description">A modern dining chair with premium fabric upholstery and elegant lines.</p>
+                    <p class="price">289 EUR</p>
+                    <p class="stock-info">In stock - 5 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/chairr11.jpg" alt="Elegant Velvet Dining Chair">
+                    <h2 class="product-title">Elegant Velvet Dining Chair</h2>
+                    <p class="product-description">Dimensions: 49 x 55 x 89 cm</p>
+                    <p class="product-description">A sophisticated dining chair featuring luxurious velvet upholstery and refined details.</p>
+                    <p class="price">359 EUR</p>
+                    <p class="stock-info">In stock - 8 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/chairr8.jpg" alt="Classic Upholstered Dining Chair">
+                    <h2 class="product-title">Classic Upholstered Dining Chair</h2>
+                    <p class="product-description">Dimensions: 47 x 53 x 88 cm</p>
+                    <p class="product-description">A timeless dining chair with comfortable padding and durable fabric cover.</p>
+                    <p class="price">269 EUR</p>
+                    <p class="stock-info">In stock - 11 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/chairr10.jpg" alt="Modern Comfort Dining Chair">
+                    <h2 class="product-title">Modern Comfort Dining Chair</h2>
+                    <p class="product-description">Dimensions: 48 x 54 x 86 cm</p>
+                    <p class="product-description">A contemporary dining chair designed for maximum comfort and style.</p>
+                    <p class="price">299 EUR</p>
+                    <p class="stock-info">In stock - 7 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/chairr9.jpg" alt="Scandinavian Dining Chair">
+                    <h2 class="product-title">Scandinavian Dining Chair</h2>
+                    <p class="product-description">Dimensions: 45 x 51 x 85 cm</p>
+                    <p class="product-description">A clean-lined dining chair with Scandinavian-inspired design elements.</p>
+                    <p class="price">249 EUR</p>
+                    <p class="stock-info">In stock - 6 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/balans2.jpg" alt="Casimira Rattan Rocking Chair">
+                    <h2 class="product-title">Casimira Light Brown Rattan Rocking Chair by Bizzott</h2>
+                    <p class="product-description">Dimensions: 60 x 95 x 100 cm</p>
+                    <p class="product-description">A charming rattan rocking chair with a natural look, perfect for relaxing in any indoor/outdoor space.</p>
+                    <p class="price">499 EUR</p>
+                    <p class="stock-info">In stock - 3 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+    
+                <div class="product">
+                    <img src="images/furniture/balans3.jpg" alt="Green Fabric Rocking Chair">
+                    <h2 class="product-title">Green Fabric Rocking Chair by Kave Home</h2>
+                    <p class="product-description">Dimensions: 70 x 90 x 100 cm</p>
+                    <p class="product-description">A stylish green fabric rocking chair, designed for comfort and modern aesthetics.</p>
+                    <p class="price">579 EUR</p>
+                    <p class="stock-info">In stock - 4 pieces</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+        </div>
+    </main>
+    
+    <footer class="footer-section" style="background: #f8f8f8; padding: 2rem 2rem; margin-top: 2rem;">
+        <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Useful Information</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="careers.html" style="color: #666; text-decoration: none;">Careers</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="termsAndConditions.html" style="color: #666; text-decoration: none;">Terms & Conditions</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="companyPolice.html" style="color: #666; text-decoration: none;">Company Policy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="privacyPolice.html" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Payment & Delivery</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="howToBuy.html" style="color: #666; text-decoration: none;">How to Buy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="paymentMethods.html" style="color: #666; text-decoration: none;">Payment Methods</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="shippping.html" style="color: #666; text-decoration: none;">Shippind & Return</a></li>
+                    <li style="margin-bottom: 0.3rem;">
+                        <a href="return_form.pdf" id="downloadBtn" class="download-btn" style="color: #666; text-decoration: none;">
+                            Return Form
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+        <div class="footer-column">
+            <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Support</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.3rem;"><a href="faq.html" style="color: #666; text-decoration: none;">FAQ</a></li>
+            </ul>
+        </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; color: #666;">
+            © HYGGE 2024
+        </div>
+    </footer>
+    
+   <script>
+        // Product Management Script
+        class ProductManager {
+            constructor() {
+                this.storageKey = 'hyggeProducts';
+                this.initializeStorage();
+            }
+    
+            // Initialize local storage if not exists
+            initializeStorage() {
+                if (!localStorage.getItem(this.storageKey)) {
+                    localStorage.setItem(this.storageKey, JSON.stringify([]));
+                }
+            }
+    
+            // Get products by category
+            getProductsByCategory(category) {
+                const products = JSON.parse(localStorage.getItem(this.storageKey)) || [];
+                return products.filter(p => p.category === category);
+            }
+        }
+    
+        // Initialize product manager
+        const productManager = new ProductManager();
+    
+        // Function to render chairs
+        function renderChairs() {
+            const chairsContainer = document.getElementById('chairs-container');
+            const chairs = productManager.getProductsByCategory('chairs');
+    
+            // Clear existing content
+            chairsContainer.innerHTML = '';
+    
+            // Render each chair
+            chairs.forEach(chair => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product');
+                productElement.innerHTML = `
+                    <img src="${chair.image_url || 'placeholder.jpg'}" alt="${chair.name}">
+                    <h2 class="product-title">${chair.name}</h2>
+                    <p class="product-description">${chair.description}</p>
+                    <p class="price">€${chair.price.toFixed(2)}</p>
+                    <p class="stock-info">In stock - ${chair.stock_quantity} pieces</p>
+                    <button class="add-to-cart" onclick="addToCart(${chair.id})">Add to Cart</button>
+                `;
+                chairsContainer.appendChild(productElement);
+            });
+        }
+    
+        // Function to add product to cart
+        function addToCart(productId) {
+            const products = JSON.parse(localStorage.getItem('hyggeProducts')) || [];
+            const product = products.find(p => p.id === productId);
+            
+            if (product) {
+                let cart = JSON.parse(localStorage.getItem('hyggeCart')) || [];
+                const existingProduct = cart.find(item => item.id === productId);
+                
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    cart.push({
+                        ...product,
+                        quantity: 1
+                    });
+                }
+    
+                localStorage.setItem('hyggeCart', JSON.stringify(cart));
+                alert(`Added ${product.name} to cart!`);
+            }
+        }
+    
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const products = document.querySelectorAll('.product');
+            
+            products.forEach(product => {
+                const title = product.querySelector('.product-title').textContent.toLowerCase();
+                
+                if (searchTerm === '' || title.includes(searchTerm)) {
+                    product.style.display = 'flex';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    
+        // Render chairs when page loads
+        document.addEventListener('DOMContentLoaded', renderChairs);
+        </script> 
+
+        <script src="product-management.js"></script>
+        <script>
+            // Render chairs
+            function renderChairs() {
+                const chairsContainer = document.getElementById('chairsContainer');
+                chairsContainer.innerHTML = '';
+    
+                const chairs = productManager.getProductsByCategory('chairs');
+                chairs.forEach(chair => {
+                    const chairElement = document.createElement('div');
+                    chairElement.classList.add('bg-white', 'shadow-md', 'rounded', 'p-4');
+    
+                    chairElement.innerHTML = `
+                        <img src="${chair.image_url || 'placeholder.jpg'}" alt="${chair.name}" class="w-full h-48 object-cover mb-4">
+                        <h3 class="text-lg font-bold mb-2">${chair.name}</h3>
+                        <p class="text-gray-600 mb-4">${chair.description}</p>
+                        <p class="text-2xl font-bold mb-4">€${chair.price.toFixed(2)}</p>
+                        <p class="text-gray-600 mb-4">In stock - ${chair.stock_quantity} pieces</p>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="addToCart(${chair.id})">Add to Cart</button>
+                    `;
+    
+                    chairsContainer.appendChild(chairElement);
+                });
+            }
+    
+            // Add to cart
+            function addToCart(chairId) {
+                const chair = productManager.getProductById(chairId);
+                if (chair) {
+                    // Implement cart functionality here
+                    alert(`Added ${chair.name} to cart!`);
+                }
+            }
+    
+            // Load chairs on page load
+            document.addEventListener('DOMContentLoaded', renderChairs);
+        </script>
+
+<script>
+    document.getElementById('downloadBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const link = document.createElement('a');
+        link.setAttribute('href', 'return_form.pdf');
+        link.setAttribute('download', 'return_form.pdf');
+        link.setAttribute('target', '_blank');
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+</script>
+
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <title>Chairs Collection Shop</title> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: black;
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .main-content {
+            padding-top: 100px;
+            padding: 2rem;
+        }
+
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .product {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 1rem 0;
+        }
+
+        .add-to-cart {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+        }
+
+        .add-to-cart:hover {
+            background-color: #333;
+        }
+
+        .stock-info {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .title-edit {
+            color: #666;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .spacer {
+            height: 50px;
+            width: 50px;
+        }
+
+        .icons-wrapper {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: black;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-left: 1rem; 
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 8px;
+            pointer-events: none;
+            color: black;
+            width: 16px;
+            height: 16px;
+        }
+
+        .search-input {
+            height: 30px;
+            width: 200px;
+            padding: 0 8px;
+            border: 1px solid #ccc;
+            border-radius: 14px;
+            outline: none;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: black;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: #888;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+        .spacer {
+            height: 50px;
+            width: 50px;
+        }
+
+        .footer-section {
+            background: #f8f8f8;
+            padding: 4rem 2rem;
+            margin-top: auto;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column ul li a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: #333;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="principalPage.html" class="logo">HYGGE</a>
+        <nav class="nav-menu">
+            <a href="shop.html" class="nav-link">Shop</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="icons-wrapper">
+                <a href="register.html" class="icon-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <a href="cart.html" class"cart-wrapper">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div style="height: 30px;"></div> 
+    <div class="main-content">
+        <h1 class="title-edit">Chairs Collection</h1>
+
+        <div class="catalog">
+            <!-- Chairs will be dynamically added here -->
+        </div>
+    </div>
+    
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Useful Information</h3>
+                <ul>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="termsAndConditions.html">Terms & Conditions</a></li>
+                    <li><a href="companyPolice.html">Company Policy</a></li>
+                    <li><a href="privacyPolice.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Payment & Delivery</h3>
+                <ul>
+                    <li><a href="howToBuy.html">How to Buy</a></li>
+                    <li><a href="paymentMethods.html">Payment Methods</a></li>
+                    <li><a href="shippping.html">Shipping & Return</a></li>
+                    <li><a href="return_form.pdf" id="downloadBtn" class="download-btn" style="color: #666; text-decoration: none;">
+                        Return Form
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © HYGGE 2024
+        </div>
+    </footer>
+
+
+    <script src="product-management.js"></script>
+    <script>
+        // Render chairs
+        function renderChairs() {
+            const chairsContainer = document.querySelector('.catalog');
+            chairsContainer.innerHTML = '';
+
+            const chairs = productManager.getProductsByCategory('chairs');
+            chairs.forEach(chair => {
+                const chairElement = document.createElement('div');
+                chairElement.classList.add('product');
+
+                chairElement.innerHTML = `
+                    <img src="${chair.image_url || 'placeholder.jpg'}" alt="${chair.name}">
+                    <h2 class="product-title">${chair.name}</h2>
+                    <p class="product-description">${chair.description}</p>
+                    <p class="price">€${chair.price.toFixed(2)}</p>
+                    <p class="stock-info">In stock - ${chair.stock_quantity} pieces</p>
+                    <button class="add-to-cart" onclick="addToCart(${chair.id})">Add to Cart</button>
+                `;
+
+                chairsContainer.appendChild(chairElement);
+            });
+        }
+    
+               // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const products = document.querySelectorAll('.product');
+            
+            products.forEach(product => {
+                const title = product.querySelector('.product-title').textContent.toLowerCase();
+                
+                if (searchTerm === '' || title.includes(searchTerm)) {
+                    product.style.display = 'flex';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+
+        // Return form download handler
+document.getElementById('downloadBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    const link = document.createElement('a');
+    link.setAttribute('href', 'return_form.pdf');
+    link.setAttribute('download', 'return_form.pdf');
+    link.setAttribute('target', '_blank');
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+        // Load chairs on page load
+        document.addEventListener('DOMContentLoaded', renderChairs);
+    </script>
+ 
+ <script> 
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+
+            const productDiv = this.closest('.product');
+            const name = productDiv.querySelector('.product-title').textContent;
+            const priceText = productDiv.querySelector('.price').textContent;
+          
+            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+            const stockText = productDiv.querySelector('.stock-info').textContent;
+            const stock = parseInt(stockText.match(/\d+/)[0]); 
+            const image = productDiv.querySelector('img').src;
+            
+            addToCart({
+                id: Date.now(), 
+                name: name,
+                price: price,
+                stock: stock,
+                image: image,
+                quantity: 1
+            });
+        });
+    });
+});
+
+function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(item => item.name === product.name);
+
+    if (existingItem) {
+        if (existingItem.quantity >= product.stock) {
+            alert(`Sorry, only ${product.stock} items available in stock.`);
+            return;
+        }
+        existingItem.quantity += 1;
+    } else {
+        cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert('Product added to cart successfully!');
+}
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCount = document.querySelector('.cart-count');
+    if (cartCount) {
+        cartCount.textContent = count;
+    }
+}
+
+updateCartCount();
+ </script>
+
+<script> 
+    // Funcție pentru actualizarea header-ului în funcție de starea autentificării
+function updateHeader() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const accountLink = document.createElement('a');
+    
+    if (currentUser && currentUser.isLoggedIn) {
+        accountLink.href = 'clientAccount.html';
+        accountLink.className = 'nav-link';
+        accountLink.textContent = 'My Account';
+    } else {
+        // accountLink.href = 'login.html';
+        // accountLink.className = 'nav-link';
+        // accountLink.textContent = 'Login';
+    }
+
+    // Adăugăm link-ul în meniu
+    document.querySelector('.nav-menu').appendChild(accountLink);
+}
+
+// Apelăm funcția la încărcarea paginii
+document.addEventListener('DOMContentLoaded', updateHeader); 
+</script> 
+
+
+</body>
+</html>

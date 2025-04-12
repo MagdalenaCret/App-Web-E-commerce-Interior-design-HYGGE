@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: black;
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .main-content {
+            padding-top: 100px;
+            padding: 2rem;
+        }
+
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0;
+            position: relative;
+        }
+
+        .product img {
+            width: 80%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        .product-slider {
+            width: 80%;
+    position: relative; 
+    max-width: 500px; 
+    margin: auto; 
+    overflow: hidden;
+}
+
+.product-slider {
+    position: relative; 
+    max-width: 500px; 
+    margin: auto; 
+    overflow: hidden; 
+}
+
+.product-slider img {
+    display: none; 
+    width: 100%; 
+    height: auto; 
+}
+
+.product-slider img.active {
+    display: block; 
+}
+
+.nav-btn {
+    position: absolute; 
+    top: 50%; 
+    right: 10px; 
+    transform: translateY(-50%); 
+    background: none; 
+    border: none; 
+    font-size: 2rem; 
+    cursor: pointer; 
+    color: black; 
+}
+
+  .icons-wrapper {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: black;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+     
+.back-button {
+    background-color: rgba(255, 255, 255, 0.5); 
+    color: #000;
+    padding: 8px 16px; 
+    border: none;
+    border-radius: 6px; 
+    text-decoration: none;
+    font-size: 14px; 
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.8); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.back-button svg {
+    margin-right: 6px; 
+    width: 12px; 
+    height: 12px;
+    fill: black; 
+}
+
+.title-edit {
+    color:#333; 
+    font-family: 'Segoe UI', sans-serif; 
+    font-size: 30px; 
+    font-weight: bold; 
+    margin: 0; 
+    text-align: center; 
+}
+.spacer {
+height: 50px; 
+width: 50px; 
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="principalPage.html" class="logo">HYGGE</a>
+        <nav class="nav-menu">
+            <a href="shop.html" class="nav-link">Shop</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="icons-wrapper">
+                <a href="register.html" class="icon-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <div class="cart-wrapper">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+        <a href="principalPage.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Back
+        </a>
+    </header>
+
+    <main class="main-content">
+        
+        <div style="height: 70px;"></div> 
+        <h1 class="title-edit">Chairs Catalog</h1>
+        <div style="height: 70px;"></div> 
+        <div class="catalog">
+            <div class="product">
+                <img src="images/furniture/product52.jpg" alt="Cozy Armchair">
+                <h2 class="product-title">Scarlet Red Urban Dining Chair</h2>
+                <p class="product-description">Dimensions: 48 x 52 x 85 cm</p>
+                <p class="product-description">Description: A bold red dining chair that adds a vibrant touch to any dining space while ensuring comfortable seating.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product47.jpg" alt="HYGGE Blanket">
+                <h2 class="product-title">Ivory Cream Fabric Dining Chair</h2>
+                <p class="product-description">Dimensions: 47 x 50 x 86 cm</p>
+                <p class="product-description">Description: A soft cream-colored dining chair with a clean and neutral look, perfect for bright and airy interiors.</p>
+            </div>
+            <div class="product">
+                <div class="product-slider">
+     
+                    <img class="active" src="images/furniture/product46.jpg" alt="Nordic Vase Set">
+            
+                    <img src="images/furniture/product46_2.jpg" alt="Nordic Vase Set - Alternative View">
+            
+                    <img src="images/furniture/product46_3.jpg" alt="Nordic Vase Set - Alternative View">
+               
+                    <button class="nav-btn" onclick="navigateImage(this)">&#8594;</button>
+                </div>
+                
+                
+                <h2 class="product-title">Addi Beige Fabric Dining Chair by Actona Company</h2>
+                <p class="product-description">Dimensions: 47 x 53 x 86 cm</p>
+                <p class="product-description">Description: A neutral-toned fabric dining chair with a soft texture, perfect for versatile dining room decor.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product3_2.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Tressia Style Black Dining Chair by Kave Home</h2>
+                <p class="product-description">Dimensions: 46 x 52 x 84 cm</p>
+                <p class="product-description">Description: A sleek black dining chair with modern lines, suitable for elegant interiors.</p>
+            </div>
+            <div class="product">
+                <div class="product-slider">
+              
+                    <img class="active" src="images/furniture/product4.jpg" alt="Nordic Vase Set">
+              
+                    <img src="images/furniture/product4_2.jpg" alt="Nordic Vase Set - Alternative View">
+           
+                    <button class="nav-btn next-btn" onclick="navigateImage(this)">&#8594;</button>
+                </div>
+                <h2 class="product-title">Tressia Style Brown Wooden Dining Chair by Kave Home</h2>
+                <p class="product-description">Dimensions: 46 x 52 x 84 cm</p>
+                <p class="product-description">Description: A wooden dining chair in rich brown tones, offering a timeless and versatile style.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product24.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Alsie Light Brown Wooden Dining Chair by Kave Home</h2>
+                <p class="product-description">Dimensions: 45 x 51 x 86 cm</p>
+                <p class="product-description">Description: A light brown wooden chair that combines functionality and a rustic charm for dining spaces</p>
+            </div>
+         
+            <div class="product">
+                <img src="images/furniture/product70.png" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Tressia Style Black Wooden Dining Chair with Plush Cushion by Kave Home</h2>
+                <p class="product-description">Dimensions: 46 x 52 x 84 cm</p>
+                <p>Description: A sleek black wooden chair featuring a plush cushioned seat, combining modern design with ultimate comfort.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product70_1_2.png" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Tressia Style Brown Wooden Dining Chair with Plush Cushion by Kave Home</h2>
+                <p>Dimensions: 46 x 52 x 84 cm</p>
+                <p>Description: A warm brown wooden dining chair with a cozy, plush cushion, offering timeless elegance and comfort.</p>
+            </div>
+               <div class="product">
+                <img src="images/furniture/product2_1.png" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Minimalist Bookshelf</h2>
+                <p class="product-description">Organize your books and decor with this sleek and modern bookshelf designed for minimalists.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product6_1.png" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product29_3_1.png" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+       
+            <div class="product">
+                <img src="images/furniture/product75_1.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <div class="product-slider">
+            
+                    <img class="active" src="images/furniture/chairr1.jpg" alt="Nordic Vase Set">
+             
+                    <img src="images/furniture/chairr2.jpg" alt="Nordic Vase Set - Alternative View">
+                 
+                    <button class="nav-btn next-btn" onclick="navigateImage(this)">&#8594;</button>
+                </div>
+                <h2 class="product-title">
+                    Natural Wooden Dining Chair with Rattan Seat</h2>
+                <p class="product-description">Dimensions: 46 x 50 x 85 cm</p>
+                <p>Description: A wooden dining chair featuring a handwoven rattan seat, combining rustic charm with a timeless design for a natural and elegant look.</p>
+            </div>    
+            <div class="product">
+                <img src="images/furniture/chairr4.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Cozy Blue Plush Dining Chair</h2>
+                <p class="product-description">Dimensions: 50 x 55 x 87 cm</p>
+                <p class="product-description">Description: A comfortable dining chair with a soft blue plush seat and backrest, designed to bring both style and coziness to your dining area.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product86.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Azure Blue Armchair</h2>
+                <p class="product-description">Dimensions: 75 x 80 x 100 cm</p>
+                <p class="product-description">Description: A stylish blue armchair with soft upholstery and a modern silhouette, perfect for adding a pop of color and comfort to your living space.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product81.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Classic Brown Wooden Dining Chair</h2>
+                <p class="product-description">Dimensions: 45 x 50 x 88 cm</p>
+                <p>Description: A traditional dining chair crafted entirely from rich brown wood, offering a timeless and versatile design perfect for classic or rustic interiors.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product85_1.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Cherry Velvet Green Dining Chair by HyggeCollection</h2>
+                <p class="product-description">Dimensions: 48 x 53 x 85 cm </p>
+                    <p class="product-description">    Description: A luxurious green velvet dining chair with a contemporary feel, perfect for cozy dining setups.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product89_1.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/product90_1.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <div class="product-slider">
+      
+                    <img class="active" src="images/furniture/product91.jpg" alt="Nordic Vase Set">
+                
+                    <img src="images/furniture/product91_1.jpg" alt="Nordic Vase Set - Alternative View">
+              
+                    <img src="images/furniture/product91_2.jpg" alt="Nordic Vase Set - Alternative View">
+                  
+                    <button class="nav-btn" onclick="navigateImage(this)">&#8594;</button>
+                </div>
+                <h2 class="product-title">Modern Floor Lamp</h2>
+                <p class="product-description">Illuminate your space with this elegant and minimalist floor lamp, crafted for modern interiors.</p>
+            </div>
+            <div class="product">
+                <div class="product-slider">
+                
+                    <img class="active" src="images/furniture/product63.jpg" alt="Nordic Vase Set">
+         
+                    <img src="images/furniture/product63_1.jpg" alt="Nordic Vase Set - Alternative View">
+               
+                    <img src="images/furniture/product63_2.jpg" alt="Nordic Vase Set - Alternative View">
+                
+                    <button class="nav-btn" onclick="navigateImage(this)">&#8594;</button>
+                </div>
+                <h2 class="product-title">Modern Floor Lamp</h2>
+                <p class="product-description">Illuminate your space with this elegant and minimalist floor lamp, crafted for modern interiors.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/chairr5.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/chairr6.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/chairr7.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/chairr11.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/chairr8.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/chairr10.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/chairr9.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Ceramic Tea Set</h2>
+                <p class="product-description">Enjoy your tea in style with this beautifully crafted ceramic tea set, perfect for any occasion.</p>
+            </div>
+            <div class="product">
+                <div class="product-slider">
+    
+                    <img class="active" src="images/furniture/chairr15.jpg" alt="Nordic Vase Set">
+          
+                    <img src="images/furniture/chairr15_1.jpg" alt="Nordic Vase Set - Alternative View">
+             
+                    <img src="images/furniture/chairr15_2.jpg" alt="Nordic Vase Set - Alternative View">
+         
+                    <button class="nav-btn" onclick="navigateImage(this)">&#8594;</button>
+                </div>
+                <h2 class="product-title">Casimira Light Grey Rocking Chair by Bizzotto</h2>
+                <p class="product-description">Dimensions: 60 x 95 x 100 cm</p>
+                <p class="product-description">Description: A charming rattan rocking chair with a natural look, perfect for relaxing in any indoor space.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/balans1.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Vania Cream Fabric Rocking Chair by Kave Home</h2>
+                <p class="product-description">Dimensions: 70 x 90 x 100 cm</p>
+                <p class="product-description">Description: A cozy cream-colored rocking chair, ideal for relaxing in style.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/balans2.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Casimira Light Brown Rattan Rocking Chair by Bizzott</h2>
+                <p class="product-description">Dimensions: 60 x 95 x 100 cm</p>
+                <p class="product-description">Description: A charming rattan rocking chair with a natural look, perfect for relaxing in any indoor/outdoor space.</p>
+            </div>
+            <div class="product">
+                <img src="images/furniture/balans3.jpg" alt="Minimalist Bookshelf">
+                <h2 class="product-title">Green Fabric Rocking Chair by Kave Home</h2>
+                <p class="product-description">Dimensions: 70 x 90 x 100 cm</p>
+                <p class="product-description">Description: A stylish green fabric rocking chair, designed for comfort and modern aesthetics.</p>
+            </div>
+
+        </div>
+    </main>
+   
+    
+    <footer class="footer-section" style="background: #f8f8f8; padding: 2rem 2rem; margin-top: 2rem;">
+        <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Useful Information</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="careers.html" style="color: #666; text-decoration: none;">Careers</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="termsAndConditions.html" style="color: #666; text-decoration: none;">Terms & Conditions</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="companyPolice.html" style="color: #666; text-decoration: none;">Company Policy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="privacyPolice.html" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Payment & Delivery</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="howToBuy.html" style="color: #666; text-decoration: none;">How to Buy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="paymentMethods.html" style="color: #666; text-decoration: none;">Payment Methods</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="shippping.html" style="color: #666; text-decoration: none;">Shippind & Return</a></li>
+                    <li style="margin-bottom: 0.3rem;">
+                        <a href="return_form.pdf" id="downloadBtn" class="download-btn" style="color: #666; text-decoration: none;">
+                            Return Form
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+        <div class="footer-column">
+            <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Support</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.3rem;"><a href="faq.html" style="color: #666; text-decoration: none;">FAQ</a></li>
+            </ul>
+        </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; color: #666;">
+            © HYGGE 2024
+        </div>
+    </footer>
+
+    <script>
+
+    function navigateImage(button) {
+        const productSlider = button.closest('.product-slider'); 
+        const images = productSlider.querySelectorAll('img'); 
+        let activeImageIndex = Array.from(images).findIndex(image => image.classList.contains('active')); 
+
+  
+    images[activeImageIndex].classList.remove('active');
+
+    if (button.innerHTML === '→') {
+        activeImageIndex = (activeImageIndex + 1) % images.length; 
+    } else {
+        activeImageIndex = (activeImageIndex - 1 + images.length) % images.length; 
+    }
+
+    images[activeImageIndex].classList.add('active');
+
+    if (activeImageIndex === 0) {
+        button.innerHTML = '→'; 
+    } else if (activeImageIndex === images.length - 1) {
+        button.innerHTML = '←'; 
+    } else {
+        button.innerHTML = button.innerHTML === '→' ? '→' : '←'; 
+    }
+}
+
+
+    </script>
+
+    <script>
+    document.getElementById('downloadBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const link = document.createElement('a');
+        link.setAttribute('href', 'return_form.pdf');
+        link.setAttribute('download', 'return_form.pdf');
+        link.setAttribute('target', '_blank');
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+</script>
+
+<script>
+    // Funcție pentru actualizarea header-ului în funcție de starea autentificării
+function updateHeader() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const accountLink = document.createElement('a');
+    
+    if (currentUser && currentUser.isLoggedIn) {
+        accountLink.href = 'clientAccount.html';
+        accountLink.className = 'nav-link';
+        accountLink.textContent = 'My Account';
+    } else {
+        // accountLink.href = 'login.html';
+        // accountLink.className = 'nav-link';
+        // accountLink.textContent = 'Login';
+    }
+
+    // Adăugăm link-ul în meniu
+    document.querySelector('.nav-menu').appendChild(accountLink);
+}
+
+// Apelăm funcția la încărcarea paginii
+document.addEventListener('DOMContentLoaded', updateHeader); 
+</script> 
+
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | HYGGE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: black;
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+.back-button {
+    background-color: rgba(255, 255, 255, 0.5); 
+    color: #000;
+    padding: 8px 16px; 
+    border: none;
+    border-radius: 6px; 
+    text-decoration: none;
+    font-size: 14px; 
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.8); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.back-button svg {
+    margin-right: 6px; 
+    width: 12px; 
+    height: 12px;
+    fill: black; 
+}
+
+        .main-content {
+            padding-top: 100px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            letter-spacing: 5px;
+            color: #333;
+        }
+
+        .section-title {
+            font-size: 1.7rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .about-text {
+    font-size: 1.0rem;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+    color: #444;
+    text-align: center;
+    padding: 0 1rem; 
+}
+
+        .icons-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .icon-link {
+            text-decoration: none;
+            color: black;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .cart-wrapper {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: black; 
+            color: white; 
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        /*Cod pentru caruselul de imagine - css*/
+        .reviews-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .reviews-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .review-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            margin: 0 0.5rem; 
+        }
+
+        .review-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .review-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .review-role {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #333;
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .arrow-right {
+            right: 0;
+        }
+        
+        .brands-section {
+            padding: 4rem 2rem;
+            background: #f8f8f8;
+        }
+
+        .brands-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            font-family: "Times New Roman", serif;
+        }
+
+        .view-all-brands {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .view-all-link {
+            color: #988F86;
+            text-decoration: none;
+        }
+
+        .brands-carousel {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .brand-logo {
+            height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            filter: grayscale(0%);
+        }
+
+
+    .content-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+.text-image-section {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    margin-bottom: 70px;
+    gap: 20px;
+}
+
+.text-image-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.text-box {
+    flex: 1;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center; 
+    font-size: 1.0rem;
+}
+.text-box h2 {
+    margin-top: 0;
+    margin-bottom: 15px; 
+    color: #555;
+}
+
+.image-box {
+    flex: 1;
+}
+
+.image-box img {
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-text strong {
+    font-weight: bold; 
+}
+
+.spacer {
+    height: 50px; 
+    width: 50px; 
+}
+
+@media (max-width: 400px) {
+    .text-image-section {
+        flex-direction: column;
+    }
+
+    .text-image-section.reverse {
+        flex-direction: column;
+    }
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="principalPage.html" class="logo">HYGGE</a>
+        <nav class="nav-menu">
+            <a href="shop.html" class="nav-link">Shop</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="icons-wrapper">
+                <a href="register.html" class="icon-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <a href="cart.html" class="cart-wrapper">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+        <a href="principalPage.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Back
+        </a>
+    </header>
+
+    <main class="main-content">
+
+
+        <!-- About Section -->
+        <section>
+            <div style="height: 70px;"></div> 
+            <h2 class="section-title">Who We Are</h2>
+            <p class="about-text">
+                HYGGE is a lifestyle brand focused on comfort, style, and well-being. We offer a carefully selected
+                 range of products that help create a cozy, peaceful atmosphere in your home and daily life. 
+                 From candles and home decor to furniture and personal care items, each piece is chosen to inspire 
+                 relaxation and a sense of contentment. At HYGGE, we believe that the right environment
+                 can enhance your overall well-being, providing a sanctuary for the <strong>mind</strong>,  <strong>body</strong> and  <strong>soul</strong>.
+            </p>
+        </section>
+
+        <!-- adaugat suplimentar -->
+        <div class="content-container">
+            <div class="text-image-section">
+                <div class="text-box">
+                    <h2>Our Story</h2>
+                    <p> HYGGE is a Danish concept that defines a state of comfort, warmth, and well-being, 
+                        often associated with the small, pleasant moments of life. It’s about creating a 
+                        relaxing, intimate atmosphere where you feel at peace and content. More than a style, 
+                        it is a philosophy of life that 
+                        promotes well-being and emotional connection with the space and people around you.
+
+                        The founders of the store, while searching for furniture for their own home, 
+                        realized that many of the design brands they admired were not locally available. 
+                        Driven by the desire to fill this gap and to bring high-quality design into the spotlight,
+                         they decided to create this store.</p>
+                </div>
+                <div class="image-box">
+                    <img src="images/furniture/design4.jpg" alt="Design Therapy">
+                </div>
+            </div>
+    
+            <div class="text-image-section reverse">
+                <div class="text-box">
+                    <h2>Design Therapy</h2>
+                    <p>It has been scientifically proven that interior design plays a therapeutic role,
+                         and the space around us can influence our mood. Whether it's furniture, lighting fixtures, decorative objects, or 
+                         anything else that can tell your story, delight your eyes and soul with what you love!
+                          For us, every product is more than just a simple functional object meant to 
+                          fill an empty space. We focus on sensations, pleasures, and emotions that you 
+                          experience when you look at and touch the new furniture pieces. You notice colors, 
+                          feel textures, and sense perfect shapes.</p>
+                </div>
+                <div class="image-box">
+                    <img src="images/furniture/design5.jpg" alt="Povestea noastră">
+                </div>
+            </div>
+    
+            <div class="text-image-section">
+                <div class="text-box">
+                    <h2>Exclusive Brands</h2>
+                    <p>We understand that every customer is unique, and that makes them special. 
+                        That's why we have added a wide and diverse range of brands to our portfolio 
+                        that never fail to surprise us with furniture, decorations, lighting fixtures, 
+                        and many other products. We want shopping at HYGGE to be a true experience, 
+                        where you feel special and surrounded by unique products. That's why we've managed 
+                        to add a series of exclusive brands to our portfolio: Kave Home, Wood, Nordal, Zuiver, 
+                        Versmisen and others.</p>
+                </div>
+                <div class="image-box">
+                    <img src="images/furniture/desig1_2.jpg" alt="Branduri în exclusivitate">
+                </div>
+            </div>
+        </div>
+
+    <section>
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="reviews-container">
+            <div class="reviews-wrapper">
+        
+                <div class="review-card">
+                    <p class="review-text">"I absolutely love the products from HYGGE! Everything I bought has brought such warmth to my home."</p>
+                    <p class="review-name">Emily R.</p>
+                    <p class="review-role">Interior Designer</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"The quality and the aesthetic of every item are beyond my expectations. Highly recommend!"</p>
+                    <p class="review-name">John D.</p>
+                    <p class="review-role">Artist</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"HYGGE has transformed my home into a sanctuary. I’m always excited to shop here!"</p>
+                    <p class="review-name">Sophia W.</p>
+                    <p class="review-role">Graphic Designer</p>
+                </div>
+            </div>
+            <div class="reviews-wrapper">
+        
+                <div class="review-card">
+                    <p class="review-text">"The candles I bought are perfect for setting a cozy mood in my home. Highly recommend!"</p>
+                    <p class="review-name">Lily P.</p>
+                    <p class="review-role">Photographer</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"I adore the minimalist design of the products, they really match my home decor!"</p>
+                    <p class="review-name">Mark T.</p>
+                    <p class="review-role">Architect</p>
+                </div>
+                <div class="review-card">
+                    <p class="review-text">"HYGGE is my go-to shop for everything that makes my home feel like a retreat!"</p>
+                    <p class="review-name">Rachel G.</p>
+                    <p class="review-role">Teacher</p>
+                </div>
+            </div>
+            <span class="arrow arrow-right" id="next">&#8594;</span>
+        </div>
+
+    </section>
+
+</main>
+    
+    <section class="brands-section">
+        <h2 class="brands-title">Brands</h2>
+        <div class="brands-carousel">
+            <img src="images/brands/brand1.jpg" alt="Brand 1" class="brand-logo">
+            <img src="images/brands/brand2.jpg" alt="Brand 2" class="brand-logo">
+            <img src="images/brands/brand3.jpg" alt="Brand 3" class="brand-logo">
+            <img src="images/brands/brand4_1.png" alt="Brand 4" class="brand-logo">
+            <img src="images/brands/brand5.jpg" alt="Brand 5" class="brand-logo">
+            <img src="images/brands/brand6_1.png" alt="Brand 6" class="brand-logo">
+        </div>
+    </section>
+
+    <footer class="footer-section" style="background: #f8f8f8; padding: 2rem 2rem; margin-top: 2rem;">
+        <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Useful Information</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="careers.html" style="color: #666; text-decoration: none;">Careers</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="termsAndConditions.html" style="color: #666; text-decoration: none;">Terms & Conditions</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="companyPolice.html" style="color: #666; text-decoration: none;">Company Policy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="privacyPolice.html" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Payment & Delivery</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="howToBuy.html" style="color: #666; text-decoration: none;">How to Buy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="paymentMethods.html" style="color: #666; text-decoration: none;">Payment Methods</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="shippping.html" style="color: #666; text-decoration: none;">Shippind & Return</a></li>
+                    <li style="margin-bottom: 0.3rem;">
+                        <a href="return_form.pdf" id="downloadBtn" class="download-btn" style="color: #666; text-decoration: none;">
+                            Return Form
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+        <div class="footer-column">
+            <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Support</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.3rem;"><a href="faq.html" style="color: #666; text-decoration: none;">FAQ</a></li>
+            </ul>
+        </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; color: #666;">
+            © HYGGE 2024
+        </div>
+    </footer>
+
+
+    <script>
+        const reviewsWrapper = document.querySelectorAll('.reviews-wrapper');
+        const nextButton = document.getElementById('next');
+        let currentIndex = 0;
+
+        const totalReviews = reviewsWrapper.length;
+
+        function showReviews(index) {
+            const offset = -index * 100; 
+            reviewsWrapper.forEach((wrapper, idx) => {
+                wrapper.style.transform = `translateX(${offset}%)`;
+            });
+
+            if (currentIndex === totalReviews - 1) {
+                nextButton.innerHTML = '&#8592;'; 
+                nextButton.removeEventListener('click', goNext);
+                nextButton.addEventListener('click', goBack);
+            }
+        }
+
+        function goNext() {
+            currentIndex = (currentIndex + 1) % totalReviews;
+            showReviews(currentIndex);
+        }
+
+        function goBack() {
+            currentIndex = (currentIndex - 1 + totalReviews) % totalReviews;
+            showReviews(currentIndex);
+
+            if (currentIndex === 0) {
+                nextButton.innerHTML = '&#8594;'; 
+                nextButton.removeEventListener('click', goBack);
+                nextButton.addEventListener('click', goNext);
+            }
+        }
+
+        nextButton.addEventListener('click', goNext);
+        showReviews(currentIndex);
+    </script>
+
+<script>
+    document.getElementById('downloadBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const link = document.createElement('a');
+        link.setAttribute('href', 'return_form.pdf');
+        link.setAttribute('download', 'return_form.pdf');
+        link.setAttribute('target', '_blank');
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+</script>
+
+<script> 
+    // Funcție pentru actualizarea header-ului în funcție de starea autentificării
+function updateHeader() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const accountLink = document.createElement('a');
+    
+    if (currentUser && currentUser.isLoggedIn) {
+        accountLink.href = 'clientAccount.html';
+        accountLink.className = 'nav-link';
+        accountLink.textContent = 'My Account';
+    } else {
+        // accountLink.href = 'login.html';
+        // accountLink.className = 'nav-link';
+        // accountLink.textContent = 'Login';
+    }
+
+    // Adăugăm link-ul în meniu
+    document.querySelector('.nav-menu').appendChild(accountLink);
+}
+
+// Apelăm funcția la încărcarea paginii
+document.addEventListener('DOMContentLoaded', updateHeader); 
+</script> 
+
+<script>
+    // Funcție pentru actualizarea header-ului în funcție de starea autentificării
+function updateHeader() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const accountLink = document.createElement('a');
+    
+    if (currentUser && currentUser.isLoggedIn) {
+        accountLink.href = 'clientAccount.html';
+        accountLink.className = 'nav-link';
+        accountLink.textContent = 'My Account';
+    } else {
+        // accountLink.href = 'login.html';
+        // accountLink.className = 'nav-link';
+        // accountLink.textContent = 'Login';
+    }
+
+    // Adăugăm link-ul în meniu
+    document.querySelector('.nav-menu').appendChild(accountLink);
+}
+
+// Apelăm funcția la încărcarea paginii
+document.addEventListener('DOMContentLoaded', updateHeader); 
+</script> 
+
+
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+
+        body {
+            padding-top: 60px;
+            min-height: 100vh;
+            position: relative;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .admin-name {
+            font-size: 24px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .message-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            display: none;
+        }
+
+        .logout-btn {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .spacer {
+    height: 50px; 
+    width: 50px;  }
+
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .log-btn {
+            background-color: #666;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .log-btn:hover {
+            background-color: #444;
+        }
+
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .edit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            background-color: #218838;
+        }
+
+        .action-btn {
+            margin-right: 0.5rem;
+        }
+
+        
+</style>
+
+
+</style>
+</head>
+<body>
+   
+        <header class="header">
+            <a href="principalPage.html" class="logo">HYGGE</a>
+            <nav class="nav-menu">
+                <a href="productManagement.html" class="nav-link">Products Management</a>
+                <a href="order_management.html" class="nav-link">Orders Management</a>
+                <a href="messages.html" class="nav-link">Career Messages <span class="message-count" id="careerMessageCount"></span></a>
+                <a href="messageContact.html" class="nav-link">Clients Messages <span class="message-count" id="contactMessageCount"></span></a>
+                <a href="principalPage.html" class="log-btn">Logout</a>
+            </nav>
+        </header>
+
+      
+        <div class="container mx-auto py-1">
+            <div style="height: 50px;"></div> 
+        <h1 class="text-2xl font-bold mb-4">Chairs Management</h1>
+
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full">
+            <h2 class="text-lg font-bold mb-4">Add/Edit Chair</h2>
+            <form id="chairForm">
+                <input type="hidden" id="chairId">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="name">
+                        Name
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Chair Name" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="description">
+                        Description
+                    </label>
+                    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" placeholder="Chair Description" required></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="price">
+                        Price (EUR)
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="number" step="0.01" placeholder="Chair Price" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="stock">
+                        Stock Quantity
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stock" type="number" placeholder="Chair Stock" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="image">
+                        Image
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" type="text" placeholder="Image URL">
+                </div>
+                <!-- <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="imageUpload">
+                        Image
+                    </label>
+                    <input class="hidden" id="imageUpload" type="file" accept="image/furniture/*" onchange="previewImage(event)">
+                    <button class="submit-btn" onclick="document.getElementById('imageUpload').click(); return false;">Choose File</button>
+                    <div id="imagePreview" class="mt-4">
+                        <p>No image selected.</p>
+                    </div>
+                </div> -->
+                <div class="flex justify-end">
+                    <button type="submit" class="submit-btn mr-2">Save Chair</button>
+                    <button type="button" class="delete-btn" onclick="deleteChair()">Delete Chair</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full">
+            <h2 class="text-lg font-bold mb-4">Chairs</h2>
+            <table class="table-auto w-full">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Image</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Price</th>
+                        <th class="px-4 py-2">Stock</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="chairsTable">
+               
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="product-management.js"></script>
+    <script>
+        // Load chairs
+        function loadChairs() {
+            const chairs = productManager.getProductsByCategory('chairs');
+            const chairsTable = document.getElementById('chairsTable');
+            chairsTable.innerHTML = '';
+
+            chairs.forEach(chair => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="border px-4 py-2">
+                        <img src="${chair.image_url || 'placeholder.jpg'}" alt="${chair.name}" class="w-16 h-16 object-cover">
+                    </td>
+                    <td class="border px-4 py-2">${chair.name}</td>
+                    <td class="border px-4 py-2">€${chair.price.toFixed(2)}</td>
+                    <td class="border px-4 py-2">${chair.stock_quantity}</td>
+                    <td class="border px-4 py-2">
+                        <button class="action-btn edit-btn" onclick="editChair(${chair.id})">Edit</button>
+                        <button class= "action-btn delete-btn" onclick="deleteChair(${chair.id})">Delete</button>
+                    </td>
+                `;
+                chairsTable.appendChild(row);
+            });
+        }
+
+        // Add/Edit chair
+        document.getElementById('chairForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const chairId = document.getElementById('chairId').value;
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const price = parseFloat(document.getElementById('price').value);
+            const stock = parseInt(document.getElementById('stock').value);
+            const image = document.getElementById('image').value;
+
+            const chair = {
+                id: chairId ? parseInt(chairId) : null,
+                name,
+                description,
+                price,
+                stock_quantity: stock,
+                image_url: image,
+                category: 'chairs'
+            };
+
+            productManager.addProduct(chair);
+            loadChairs();
+            this.reset();
+        });
+
+        // Delete chair
+        function deleteChair(chairId) {
+            if (confirm('Are you sure you want to delete this chair?')) {
+                productManager.deleteProduct(chairId);
+                loadChairs();
+            }
+        }
+
+        // Edit chair
+        function editChair(chairId) {
+            const chair = productManager.getProductById(chairId);
+            if (chair) {
+                document.getElementById('chairId').value = chair.id;
+                document.getElementById('name').value = chair.name;
+                document.getElementById('description').value = chair.description;
+                document.getElementById('price').value = chair.price;
+                document.getElementById('stock').value = chair.stock_quantity;
+                document.getElementById('image').value = chair.image_url;
+            }
+        }
+
+        // Load chairs on page load
+        document.addEventListener('DOMContentLoaded', loadChairs);
+    </script>
+
+    
+<script>
+    function updateMessageCount() {
+const careerMessages = JSON.parse(localStorage.getItem('careerMessages')) || [];
+const careerMessageCount = document.getElementById('careerMessageCount');
+
+const contactMessages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+const contactMessageCount = document.getElementById('contactMessageCount');
+
+if (careerMessages.length > 0) {
+    careerMessageCount.textContent = careerMessages.length;
+    careerMessageCount.style.display = 'inline';
+} else {
+    careerMessageCount.style.display = 'none';
+}
+
+if (contactMessages.length > 0) {
+    contactMessageCount.textContent = contactMessages.length;
+    contactMessageCount.style.display = 'inline';
+} else {
+    contactMessageCount.style.display = 'none';
+}
+}
+    window.onload = updateMessageCount;
+</script>
+
+</body>
+</html>

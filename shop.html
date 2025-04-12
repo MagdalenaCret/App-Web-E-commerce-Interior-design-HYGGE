@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Shop | HYGGE</title> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: black;
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: black;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .main-content {
+            padding-top: 100px;
+            padding: 2rem;
+        }
+
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /*butoanele de categorii de produse*/
+        
+        .categories-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    margin: 2rem auto;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    padding: 0 1.5rem;
+}
+
+.category-link {
+    text-decoration: none;
+    color: #2c3e50;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+    position: relative;
+}
+
+.category-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    background: #fafafa;
+}
+
+.category-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #bdb1b1 0%, #f7e7e7 100%);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.category-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+@media (max-width: 768px) {
+    .categories-container {
+        gap: 1rem;
+        margin: 1.5rem auto;
+    }
+    
+    .category-link {
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+
+        .product {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0;
+            position: relative;
+            text-align: center;
+        }
+
+        .product img {
+            width: 80%;
+            height: auto;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .product img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .icons-wrapper {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: black;
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .back-button {
+            background-color: rgba(255, 255, 255, 0.5); 
+            color: #000;
+            padding: 8px 16px; 
+            border: none;
+            border-radius: 6px; 
+            text-decoration: none;
+            font-size: 14px; 
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button svg {
+            margin-right: 6px;
+            width: 12px;
+            height: 12px;
+            fill: black;
+        }
+
+        .title-edit {
+            color: #555;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1.7rem;
+            font-weight: bold;
+            margin: 0;
+            text-align: center;
+        }
+
+        .spacer {
+            height: 50px;
+            width: 50px;
+        }
+
+        
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .product {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 1rem 0;
+        }
+
+        .add-to-cart {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+        }
+
+        .add-to-cart:hover {
+            background-color: #333;
+        }
+
+        .stock-info {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .new-releases {
+            padding: 2rem 1rem;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+    font-size: 1.7rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    font-family: 'Segoe UI', sans-serif;
+    color: #666;
+    margin-left: 40px; 
+}
+
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="principalPage.html" class="logo">HYGGE</a>
+        <nav class="nav-menu">
+            <a href="principalPage.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <div class="icons-wrapper">
+                <a href="register.html" class="icon-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <a href="cart.html" class="cart-wrapper">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+        <a href="principalPage.html" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Back
+        </a>
+    </header>
+    
+    <main class="main-content">
+        <div style="height: 70px;"></div>
+        <h1 class="title-edit">Shop Collections</h1>
+        <div style="height: 40px;"></div>
+
+        <div class="categories-container">
+            <a href="shopChairs.html" class="category-link">Chairs</a>
+            <a href="shopTable.html" class="category-link">Tables</a>
+            <a href="shopStorage.html" class="category-link">Storage</a>
+            <a href="shopLighting.html" class="category-link">Lighting</a>
+            <a href="shopCeramics.html" class="category-link">Ceramics</a>
+        </div>
+
+    <section class="new-releases">
+        <h2 class="section-title">New Releases</h2>
+        <div class="catalog">
+            <!-- Chairs Section -->
+            <div class="product">
+                <img src="images/furniture/chair_velvet_shop.jpg" alt="Designer Chair">
+                <h2 class="product-title">Velvet Green Chair</h2>
+                <p class="product-description">Dimensions: 48 x 53 x 85 cm</p>
+                <p class="product-description">Elegant velvet chair with a modern design, perfect for adding sophistication to any room.</p>
+                <p class="price">329 EUR</p>
+                <p class="stock-info">In stock - 7 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Tables Section -->
+            <div class="product">
+                <img src="images/furniture/nordic_shop.jpg" alt="Nordic Table">
+                <h2 class="product-title">Nordic White Dining Table</h2>
+                <p class="product-description">Dimensions: 160 x 90 x 75 cm</p>
+                <p class="product-description">Minimalist dining table with clean lines and durable construction, perfect for modern dining spaces.</p>
+                <p class="price">156 EUR</p>
+                <p class="stock-info">In stock - 4 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Storage Section -->
+            <div class="product">
+                <img src="images/furniture/storage_shop.jpg" alt="Storage Unit">
+                <h2 class="product-title">Modern Storage Cabinet</h2>
+                <p class="product-description">Dimensions: 120 x 45 x 180 cm</p>
+                <p class="product-description">Versatile storage solution combining style with functionality, featuring adjustable shelves and soft-close doors.</p>
+                <p class="price">249 EUR</p>
+                <p class="stock-info">In stock - 3 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Lighting Section -->
+            <div class="product">
+                <img src="images/furniture/lamp_shop.jpg" alt="Pendant Light">
+                <h2 class="product-title">Copper Pendant Lamp</h2>
+                <p class="product-description">Dimensions: Diameter 35 x Height 45 cm</p>
+                <p class="product-description">Contemporary lighting fixture with warm copper finish, perfect for creating ambiance.</p>
+                <p class="price">299 EUR</p>
+                <p class="stock-info">In stock - 8 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Ceramics Section -->
+            <div class="product">
+                <img src="images/furniture/ceramic_shop.jpg" alt="Ceramic Vase">
+                <h2 class="product-title">Handcrafted Ceramic Vase</h2>
+                <p class="product-description">Dimensions: Height 30 x Diameter 20 cm</p>
+                <p class="product-description">Artisanal ceramic vase with unique textures and patterns, handmade by local artisans.</p>
+                <p class="price">150 EUR</p>
+                <p class="stock-info">In stock - 6 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- New Products -->
+            <div class="product">
+                <img src="images/furniture/ratan_shop.jpg" alt="Rattan Lounge Chair">
+                <h2 class="product-title">Rattan Lounge Chair</h2>
+                <p class="product-description">Dimensions: 75 x 80 x 90 cm</p>
+                <p class="product-description">Natural rattan lounge chair with comfortable cushioning, perfect for creating a cozy reading nook.</p>
+                <p class="price">250 EUR</p>
+                <p class="stock-info">In stock - 5 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="images/furniture/shop_desk.jpg" alt="Wall-Mounted Desk">
+                <h2 class="product-title">Floating Work Desk</h2>
+                <p class="product-description">Dimensions: 120 x 60 x 75 cm (when open)</p>
+                <p class="product-description">Space-saving wall-mounted desk that folds down when needed, ideal for compact living spaces.</p>
+                <p class="price">300 EUR</p>
+                <p class="stock-info">In stock - 6 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="images/furniture/shoo_lamp.jpg" alt="Floor Mirror">
+                <h2 class="product-title">Standing Lamp</h2>
+                <p class="product-description">Dimensions: 160 x 60 x 3 cm</p>
+                <p class="product-description">Full-length arched lamp, adding elegance and light to any room.</p>
+                <p class="price">129 EUR</p>
+                <p class="stock-info">In stock - 4 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="images/furniture/bambo_shop.jpg" alt="Room Divider">
+                <h2 class="product-title">Bamboo Room Divider</h2>
+                <p class="product-description">Dimensions: 170 x 4 x 180 cm (3 panels)</p>
+                <p class="product-description">Elegant bamboo screen divider with decorative cutouts, perfect for creating separate spaces.</p>
+                <p class="price">289 EUR</p>
+                <p class="stock-info">In stock - 2 pieces</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="images/furniture/set_shop.jpg" alt="Side Table Set">
+                <h2 class="product-title">Nesting Side Table Set</h2>
+                <p class="product-description">Dimensions: Large (45x45x50 cm), Medium (35x35x40 cm), Small (25x25x30 cm)</p>
+                <p class="product-description">Set of three nesting tables with marble tops and gold-finished frames.</p>
+                <p class="price">89 EUR</p>
+                <p class="stock-info">In stock - 5 sets</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer class="footer-section" style="background: #f8f8f8; padding: 2rem 2rem; margin-top: 2rem;">
+        <div style="max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Useful Information</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="careers.html" style="color: #666; text-decoration: none;">Careers</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="termsAndConditions.html" style="color: #666; text-decoration: none;">Terms & Conditions</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="companyPolice.html" style="color: #666; text-decoration: none;">Company Policy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="privacyPolice.html" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Payment & Delivery</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.3rem;"><a href="howToBuy.html" style="color: #666; text-decoration: none;">How to Buy</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="paymentMethods.html" style="color: #666; text-decoration: none;">Payment Methods</a></li>
+                    <li style="margin-bottom: 0.3rem;"><a href="shippping.html" style="color: #666; text-decoration: none;">Shippind & Return</a></li>
+                    <li style="margin-bottom: 0.3rem;">
+                        <a href="return_form.pdf" id="downloadBtn" class="download-btn" style="color: #666; text-decoration: none;">
+                            Return Form
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+        <div class="footer-column">
+            <h3 style="color: #333; font-size: 1rem; margin-bottom: 1rem;">Support</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.3rem;"><a href="faq.html" style="color: #666; text-decoration: none;">FAQ</a></li>
+            </ul>
+        </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #ddd; color: #666;">
+            © HYGGE 2024
+        </div>
+    </footer>
+      
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const link = document.createElement('a');
+            link.setAttribute('href', 'return_form.pdf');
+            link.setAttribute('download', 'return_form.pdf');
+            link.setAttribute('target', '_blank');
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+
+    <script>
+    // Add this script to shop.html
+document.addEventListener('DOMContentLoaded', function() {
+    loadProducts();
+});
+
+function loadProducts() {
+    fetch('get_shop_products.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                displayProducts(data.products);
+            } else {
+                console.error('Error:', data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function displayProducts(products) {
+    const catalogDiv = document.querySelector('.catalog');
+    catalogDiv.innerHTML = ''; // Clear existing content
+
+    products.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.className = 'product';
+        
+        productElement.innerHTML = `
+            <img src="${product.image_url || 'images/placeholder.jpg'}" 
+                 alt="${product.name}"
+                 onerror="this.src='images/placeholder.jpg'">
+            <h2 class="product-title">${product.name}</h2>
+            <p class="product-description">${product.description}</p>
+            <p class="product-price">€${parseFloat(product.price).toFixed(2)}</p>
+            <p class="product-stock">In stock: ${product.stock_quantity} pieces</p>
+            <button onclick="addToCart(${JSON.stringify(product).replace(/"/g, '&quot;')})" 
+                    class="add-to-cart-btn">
+                Add to Cart
+            </button>
+        `;
+        
+        catalogDiv.appendChild(productElement);bb
+    });
+}
+
+// Funcții pentru managementul coșului
+function addToCart(productElement) {
+    const product = {
+        id: Date.now(), 
+        name: productElement.querySelector('.product-title').textContent,
+        price: parseFloat(productElement.querySelector('.price').textContent),
+        image: productElement.querySelector('img').src,
+        stock: parseInt(productElement.querySelector('.stock-info').textContent.match(/\d+/)[0]),
+        quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProduct = cart.find(item => item.name === product.name);
+
+    if (existingProduct) {
+        if (existingProduct.quantity < product.stock) {
+            existingProduct.quantity++;
+        } else {
+            showNotification('Maximum stock limit reached!', 'error');
+            return;
+        }
+    } else {
+        cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    showNotification('Product added to cart!', 'success');
+}
+
+function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.querySelector('.cart-count').textContent = count;
+}
+
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => notification.remove(), 3000);
+}
+
+const style = document.createElement('style');
+style.textContent = `
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1000;
+}
+
+.success { background-color: #4CAF50; }
+.error { background-color: #f44336; }
+`;
+
+document.head.appendChild(style);
+
+// Event Listeners
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function() {
+        const productElement = this.closest('.product');
+        addToCart(productElement);
+    });
+});
+
+</script>
+
+<script>
+    // Funcție pentru actualizarea header-ului în funcție de starea autentificării
+function updateHeader() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const accountLink = document.createElement('a');
+    
+    if (currentUser && currentUser.isLoggedIn) {
+        accountLink.href = 'clientAccount.html';
+        accountLink.className = 'nav-link';
+        accountLink.textContent = 'My Account';
+    } else {
+        // accountLink.href = 'login.html';
+        // accountLink.className = 'nav-link';
+        // accountLink.textContent = 'Login';
+    }
+
+    // Adăugăm link-ul în meniu
+    document.querySelector('.nav-menu').appendChild(accountLink);
+}
+
+// Apelăm funcția la încărcarea paginii
+document.addEventListener('DOMContentLoaded', updateHeader); 
+</script> 
+
+</body>
+</html>
